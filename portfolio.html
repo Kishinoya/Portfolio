@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ronel Valencia | BSIT Student & Gamer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00f0ff;
+            --secondary: #ff00ff;
+            --accent: #ffe600;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --card: #12121a;
+            --text: #e0e0e0;
+            --text-dim: #888;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 230, 0, 0.03) 0%, transparent 50%);
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header/Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .glitch-wrapper {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 4px;
+            position: relative;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(255, 0, 255, 0.5)); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .age-display {
+            display: inline-block;
+            background: var(--card);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            font-family: 'Orbitron', monospace;
+            color: var(--primary);
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .age-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            to { left: 100%; }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        .mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .mouse::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes scroll {
+            0% { top: 10px; opacity: 1; }
+            100% { top: 30px; opacity: 0; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 240, 255, 0.1);
+            border-color: rgba(0, 240, 255, 0.2);
+        }
+
+        /* Accordion/Dropdowns */
+        .accordion {
+            margin-top: 1rem;
+        }
+
+        .accordion-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+        }
+
+        .accordion-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .accordion-header:hover {
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .accordion-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            color: var(--primary);
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        /* Gaming Section */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .game-card:hover::before {
+            opacity: 1;
+        }
+
+        .game-card:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Links & Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-secondary::before {
+            background: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 5px 20px rgba(255, 0, 255, 0.4);
+        }
+
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Music Section */
+        .music-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: linear-gradient(90deg, rgba(0, 240, 255, 0.05), transparent);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0 15px 15px 0;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .music-card:hover {
+            background: linear-gradient(90deg, rgba(0, 240, 255, 0.1), transparent);
+            transform: translateX(10px);
+        }
+
+        .music-icon {
+            font-size: 2.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .music-info h3 {
+            color: var(--accent);
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .music-info p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .music-links {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .music-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .music-link:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        /* Stats/Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 10s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .music-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .links-container {
+                justify-content: center;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--secondary));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="glitch-wrapper">
+            <h1>RONEL VALENCIA</h1>
+        </div>
+        <p class="subtitle">4th Year BSIT Student | Gamer | Future Developer</p>
+        <div class="age-display" id="ageDisplay">Loading age...</div>
+        
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- About Section with Dropdowns -->
+        <section>
+            <h2>🎓 About Me</h2>
+            <div class="card">
+                <div class="info-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">School</div>
+                        <div class="stat-value">ACLC</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Location</div>
+                        <div class="stat-value">Balanga, Bataan</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Course</div>
+                        <div class="stat-value">BSIT</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Year</div>
+                        <div class="stat-value">4th</div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>📚 Academic Journey</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Currently pursuing Bachelor of Science in Information Technology at ACLC College of Balanga. As a 4th year student, I'm in the final stretch of my academic journey, preparing to enter the tech industry with skills in programming, system development, and IT solutions.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>🎂 Birthday Countdown</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Born on <strong>November 24, 2003</strong>. Mark your calendars! 🎉</p>
+                            <div id="birthdayCountdown" style="margin-top: 1rem; font-family: 'Orbitron', monospace; color: var(--secondary);"></div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>💻 Tech Stack Interests</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>As a BSIT student, I'm passionate about web development, gaming technologies, and software engineering. I love exploring how games are built and hope to combine my love for gaming with my technical skills in the future.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gaming Section -->
+        <section>
+            <h2>🎮 Gaming Life</h2>
+            <div class="card">
+                <p style="margin-bottom: 1.5rem; color: var(--text-dim);">When not coding, you'll find me grinding ranks in these games:</p>
+                
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-icon">🔫</div>
+                        <div class="game-title">CS2</div>
+                        <p>Counter-Strike 2</p>
+                        <small style="color: var(--text-dim); display: block; margin-top: 0.5rem;">Tactical FPS</small>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-icon">⚔️</div>
+                        <div class="game-title">DOTA 2</div>
+                        <p>Defense of the Ancients 2</p>
+                        <small style="color: var(--text-dim); display: block; margin-top: 0.5rem;">MOBA</small>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-icon">🏰</div>
+                        <div class="game-title">League of Legends</div>
+                        <p>League of Legends</p>
+                        <small style="color: var(--text-dim); display: block; margin-top: 0.5rem;">MOBA</small>
+                    </div>
+                </div>
+
+                <div class="links-container" style="margin-top: 2rem;">
+                    <a href="https://steamcommunity.com/profiles/76561198972057052/" target="_blank" class="btn">
+                        <span>🎮</span> View Steam Profile
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Section -->
+        <section>
+            <h2>🎵 Music Vibes</h2>
+            
+            <div class="music-card">
+                <div class="music-icon">🔥</div>
+                <div class="music-info">
+                    <h3>Current Favorite</h3>
+                    <p><strong>"Way Less Sad"</strong> by AJR</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-dim);">
+                        An upbeat anthem about finding optimism even when things aren't perfect. Released in 2021 as part of the "OK ORCHESTRA" album.
+                    </p>
+                    <div class="music-links">
+                        <a href="https://open.spotify.com/track/6YIivt0G3ZUuNrM62jp9pL" target="_blank" class="music-link">🎧 Spotify →</a>
+                        <a href="https://www.youtube.com/watch?v=VlVhUbGa2pg" target="_blank" class="music-link">📺 YouTube →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="music-card">
+                <div class="music-icon">💀</div>
+                <div class="music-info">
+                    <h3>All-Time Favorite</h3>
+                    <p><strong>"Bones in the Ocean"</strong> by The Longest Johns</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-dim);">
+                        A hauntingly beautiful sea shanty about survivor's guilt and remembrance. A modern traditional folk masterpiece by the British folk group.
+                    </p>
+                    <div class="music-links">
+                        <a href="https://open.spotify.com/track/3axCgesL3rsjGzCX9ZJCTo" target="_blank" class="music-link">🎧 Spotify →</a>
+                        <a href="https://www.youtube.com/watch?v=tuPafClCX3E" target="_blank" class="music-link">📺 YouTube →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Connect Section -->
+        <section>
+            <h2>🔗 Let's Connect</h2>
+            <div class="card" style="text-align: center;">
+                <p style="margin-bottom: 2rem; color: var(--text-dim);">Find me on social media or drop a message!</p>
+                
+                <div class="links-container" style="justify-content: center;">
+                    <a href="https://www.facebook.com/constantino.ronel" target="_blank" class="btn btn-secondary">
+                        <span>📘</span> Facebook
+                    </a>
+                    <a href="https://steamcommunity.com/profiles/76561198972057052/" target="_blank" class="btn">
+                        <span>🎮</span> Steam
+                    </a>
+                </div>
+
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <p style="font-family: 'Orbitron', monospace; color: var(--primary); font-size: 1.2rem;">
+                        "No I ain't happy yet, but I'm way less sad"
+                    </p>
+                    <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 0.5rem;">— AJR</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="text-align: center; padding: 3rem 2rem; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05);">
+        <p>© 2026 Ronel Valencia | Built with 💙 & ☕</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;">BSIT Student at ACLC Balanga Bataan</p>
+    </footer>
+
+    <script>
+        // Accordion functionality
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all accordions
+            document.querySelectorAll('.accordion-item').forEach(acc => {
+                acc.classList.remove('active');
+            });
+            
+            // Open clicked one if it wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Calculate age
+        function calculateAge() {
+            const birthDate = new Date('2003-11-24');
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            
+            document.getElementById('ageDisplay').textContent = `${age} Years Old`;
+        }
+
+        // Birthday countdown
+        function updateBirthdayCountdown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let birthday = new Date(currentYear, 10, 24); // November is month 10 (0-indexed)
+            
+            if (now > birthday) {
+                birthday = new Date(currentYear + 1, 10, 24);
+            }
+            
+            const diff = birthday - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            const countdownEl = document.getElementById('birthdayCountdown');
+            if (countdownEl) {
+                if (now.getMonth() === 10 && now.getDate() === 24) {
+                    countdownEl.innerHTML = '🎉🎂 HAPPY BIRTHDAY! 🎂🎉';
+                    countdownEl.style.color = '#ffe600';
+                } else {
+                    countdownEl.innerHTML = `Next birthday in: ${days} days, ${hours} hours`;
+                }
+            }
+        }
+
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                
+                // Random colors
+                const colors = ['#00f0ff', '#ff00ff', '#ffe600'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Initialize
+        calculateAge();
+        updateBirthdayCountdown();
+        createParticles();
+        
+        // Update countdown every hour
+        setInterval(updateBirthdayCountdown, 3600000);
+
+        // Smooth scroll for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add parallax effect to cards on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.card');
+            
+            parallax.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed * 0.05}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
